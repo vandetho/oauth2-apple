@@ -24,6 +24,11 @@ class AppleAccessToken extends AccessToken
     protected $isPrivateEmail;
 
     /**
+     * @var array
+     */
+    protected $idTokenPayload;
+
+    /**
      * Constructs an access token.
      *
      * @param Key[] $keys Valid Apple JWT keys
@@ -80,6 +85,8 @@ class AppleAccessToken extends AccessToken
             if (isset($payload['is_private_email'])) {
                 $this->isPrivateEmail = $payload['is_private_email'];
             }
+
+            $this->idTokenPayload = $payload;
         }
 
         parent::__construct($options);
@@ -115,5 +122,13 @@ class AppleAccessToken extends AccessToken
     public function isPrivateEmail()
     {
         return $this->isPrivateEmail;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdTokenPayload()
+    {
+        return $this->idTokenPayload;
     }
 }
