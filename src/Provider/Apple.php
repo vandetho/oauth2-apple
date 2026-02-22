@@ -26,7 +26,7 @@ class Apple extends AbstractProvider
      *
      * @var array
      */
-    public $defaultScopes = ['name', 'email'];
+    public array $defaultScopes = ['name', 'email'];
 
     /**
      * @var string the team id
