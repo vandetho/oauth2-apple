@@ -15,16 +15,17 @@ class AppleAccessTokenTest extends TestCase
      */
     public function testCreatingAccessToken()
     {
+        $tokenPayload = [
+            'sub' => '123.abc.123',
+            'email_verified' => true,
+            'email' => 'john@doe.com',
+            'is_private_email' => true
+        ];
         $externalJWTMock = m::mock('overload:Firebase\JWT\JWT');
         $externalJWTMock->shouldReceive('decode')
             ->with('something', 'examplekey')
             ->once()
-            ->andReturn([
-                'sub' => '123.abc.123',
-                'email_verified' => true,
-                'email' => 'john@doe.com',
-                'is_private_email' => true
-            ]);
+            ->andReturn($tokenPayload);
 
         $accessToken = new AppleAccessToken(['examplekey'], [
             'access_token' => 'access_token',
@@ -38,6 +39,7 @@ class AppleAccessTokenTest extends TestCase
         $this->assertEquals('access_token', $accessToken->getToken());
         $this->assertEquals('john@doe.com', $accessToken->getEmail());
         $this->assertTrue($accessToken->isPrivateEmail());
+        $this->assertEquals($tokenPayload, $accessToken->getTokenPayload());
 
         $this->assertTrue(true);
     }
