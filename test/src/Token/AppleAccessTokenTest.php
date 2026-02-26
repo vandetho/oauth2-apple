@@ -39,7 +39,7 @@ class AppleAccessTokenTest extends TestCase
         $this->assertEquals('access_token', $accessToken->getToken());
         $this->assertEquals('john@doe.com', $accessToken->getEmail());
         $this->assertTrue($accessToken->isPrivateEmail());
-        $this->assertEquals($tokenPayload, $accessToken->getIdTokenPayload());
+        $this->assertEquals($tokenPayload, $accessToken->getTokenPayload());
 
         $this->assertTrue(true);
     }

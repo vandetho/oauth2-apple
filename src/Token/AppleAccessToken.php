@@ -26,7 +26,7 @@ class AppleAccessToken extends AccessToken
     /**
      * @var array
      */
-    protected $idTokenPayload;
+    protected $tokenPayload;
 
     /**
      * Constructs an access token.
@@ -86,7 +86,7 @@ class AppleAccessToken extends AccessToken
                 $this->isPrivateEmail = $payload['is_private_email'];
             }
 
-            $this->idTokenPayload = $payload;
+            $this->tokenPayload = $payload;
         }
 
         parent::__construct($options);
@@ -127,8 +127,8 @@ class AppleAccessToken extends AccessToken
     /**
      * @return array
      */
-    public function getIdTokenPayload()
+    public function getTokenPayload()
     {
-        return $this->idTokenPayload;
+        return $this->tokenPayload;
     }
 }
